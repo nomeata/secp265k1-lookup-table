@@ -53,7 +53,7 @@ This is for a local test run, which finds *n×G* with $n<2^24$:
 * Sort each file:
 
        for i in $(seq 0 255); do
-       bsort -k 8 -r 8 lsb-20-$(printf "%02hhx" $i).bin
+       bsort -k 8 -r 8 test/lsb-20-$(printf "%02hhx" $i).bin
        done
 
 * Create an index for each file, for faster lookup:
@@ -75,7 +75,7 @@ This is for a local test run, which finds *n×G* with $n<2^24$:
 
       ./mk-lookup-table.py 9 $((0 * (1<<9)))
       ./mk-lookup-table.py 9 $((1 * (1<<9)))
-      mv small-k-rs-9-*.bin > test/small-k-rs-10.bin
+      cat small-k-rs-9-*.bin > test/small-k-rs-10.bin
       rm small-k-rs-9-*.bin
       bsort -k 32 -r 36 test/small-k-rs-10.bin
 
@@ -89,5 +89,5 @@ This is for a local test run, which finds *n×G* with $n<2^24$:
 
 * Look up the powers, brute-forcing values up to n<2^24:
 
-      ./lookup 24 lsb-20-%02hhx.bin 20 24 small-k-rs-10.bin 10 r-values.bin r-to-k.bin
+      cd test ; ../lookup 24 lsb-20-%02hhx.bin 20 24 small-k-rs-10.bin 10 r-values.bin r-to-k.bin
 
